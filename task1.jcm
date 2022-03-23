@@ -5,6 +5,44 @@
 */
 mas exercise5 {
 
-    agent sample_agent
+    agent francois : hf.asl {
+        beliefs: message("Bonjour")
+        focus: france.gui
+        focus: brazil.gui
+    }
+    agent maria    : hello.asl {
+        beliefs: message("Bom dia")
+        focus: brazil.gui  // we can avoid the explicit join (as in francois) since the focus in JCM files implies a join
+    }
+    agent giacomo  : hello.asl {
+        beliefs: message("Buon giorno")
+        focus: italy.gui
+    }
+    agent alice    : hello.asl {
+        beliefs: message("Good morning")
+        focus: usa.gui
+    }
+    
+    agent bob      : hello2.asl {
+        beliefs: country(fr)
+        focus: france.gui
+        focus: usa.gui
+    }
+
+    workspace france {
+        artifact gui: display.GUIConsole("France")
+    }
+
+    workspace italy {
+        artifact gui: display.GUIConsole("Italy")
+    }
+
+    workspace brazil {
+        artifact gui: display.GUIConsole("Brazil")
+    }
+
+    workspace usa {
+        artifact gui: display.GUIConsole("USA")
+    }
 
 }
